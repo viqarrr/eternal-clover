@@ -9,6 +9,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Post {
   id: string;
@@ -109,7 +110,7 @@ const BlogSection = ({
                   target="_blank"
                   className="transition-opacity duration-200 fade-in hover:opacity-70"
                 >
-                  <img
+                  <Image
                     src={post.image}
                     alt={post.title}
                     className="h-full w-full object-cover object-center"

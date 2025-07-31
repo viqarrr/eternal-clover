@@ -1,6 +1,5 @@
-import React, { useState } from "react";
 import Image from "next/image";
-import { ChevronRight, Heart } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 interface GameCardProps {

@@ -1,18 +1,6 @@
 import { format } from "date-fns";
-import { Lightbulb } from "lucide-react";
-
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-const defaultPost = {
-  title: "Designing websites faster with shadcn/ui",
-  authorName: "John Doe",
-  image: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg",
-  pubDate: new Date(),
-  description:
-    "A step-by-step guide to building a modern, responsive blog using React and Tailwind CSS.",
-  authorImage: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp",
-};
+import Image from "next/image";
 
 interface BlogPostData {
   title: string;
@@ -23,8 +11,23 @@ interface BlogPostData {
   authorImage: string;
 }
 
-const Blogpost = ({ post = defaultPost }: { post?: BlogPostData }) => {
-  const { title, authorName, image, pubDate, description, authorImage } = post;
+const defaultPost: BlogPostData = {
+  title: "Designing websites faster with shadcn/ui",
+  authorName: "John Doe",
+  image:
+    "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-1.svg",
+  pubDate: new Date(),
+  description:
+    "A step-by-step guide to building a modern, responsive blog using React and Tailwind CSS.",
+  authorImage:
+    "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp",
+};
+
+const Blogpost = ({ post }: { post?: Partial<BlogPostData> }) => {
+  const { title, authorName, image, pubDate, description, authorImage } = {
+    ...post,
+  };
+
   return (
     <section className="py-32">
       <div className="container">
@@ -38,37 +41,76 @@ const Blogpost = ({ post = defaultPost }: { post?: BlogPostData }) => {
           <div className="flex items-center gap-3 text-sm md:text-base">
             <Avatar className="h-8 w-8 border">
               <AvatarImage src={authorImage} />
-              <AvatarFallback>{authorName.charAt(0)}</AvatarFallback>
+              <AvatarFallback>{authorName?.charAt(0)}</AvatarFallback>
             </Avatar>
             <span>
               <a href="#" className="font-semibold">
                 {authorName}
               </a>
-              <span className="ml-1">on {format(pubDate, "MMMM d, yyyy")}</span>
+              {pubDate && (
+                <span className="ml-1">
+                  on {format(pubDate, "MMMM d, yyyy")}
+                </span>
+              )}
             </span>
           </div>
-          <img
-            src={image}
-            alt="placeholder"
-            className="mb-8 mt-4 aspect-video w-full rounded-lg border object-cover"
-          />
+          {image && (
+            <Image
+              src={image}
+              alt="placeholder"
+              className="mb-8 mt-4 aspect-video w-full rounded-lg border object-cover"
+            />
+          )}
         </div>
       </div>
       <div className="container">
         <div className="prose dark:prose-invert mx-auto max-w-3xl">
           <h2 className="text-3xl font-extrabold">Heading Lorem</h2>
           <p className="text-muted-foreground mt-2 text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum autem ullam soluta delectus dolorem quaerat! Nemo distinctio, velit a reiciendis maiores quas voluptates, deserunt natus, dolores consectetur alias dolorum provident. Dolore repudiandae praesentium consequatur, dignissimos magni, fuga quia soluta officiis, illo eligendi ipsam asperiores eveniet autem a hic pariatur provident? Magnam totam id perferendis voluptatibus eum nemo consequatur non animi impedit deserunt iste at nulla provident, quibusdam, consectetur, explicabo quae? Ex impedit ipsum sequi molestias libero saepe rerum nesciunt magni quae incidunt reprehenderit nam delectus laboriosam facere mollitia, possimus beatae similique doloribus nobis a. Quos temporibus animi totam nihil dolorem!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+            autem ullam soluta delectus dolorem quaerat! Nemo distinctio, velit
+            a reiciendis maiores quas voluptates, deserunt natus, dolores
+            consectetur alias dolorum provident. Dolore repudiandae praesentium
+            consequatur, dignissimos magni, fuga quia soluta officiis, illo
+            eligendi ipsam asperiores eveniet autem a hic pariatur provident?
+            Magnam totam id perferendis voluptatibus eum nemo consequatur non
+            animi impedit deserunt iste at nulla provident, quibusdam,
+            consectetur, explicabo quae? Ex impedit ipsum sequi molestias libero
+            saepe rerum nesciunt magni quae incidunt reprehenderit nam delectus
+            laboriosam facere mollitia, possimus beatae similique doloribus
+            nobis a. Quos temporibus animi totam nihil dolorem!
           </p>
-          
+
           <h2 className="text-3xl font-extrabold">Heading Lorem</h2>
           <p className="text-muted-foreground mt-2 text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum autem ullam soluta delectus dolorem quaerat! Nemo distinctio, velit a reiciendis maiores quas voluptates, deserunt natus, dolores consectetur alias dolorum provident. Dolore repudiandae praesentium consequatur, dignissimos magni, fuga quia soluta officiis, illo eligendi ipsam asperiores eveniet autem a hic pariatur provident? Magnam totam id perferendis voluptatibus eum nemo consequatur non animi impedit deserunt iste at nulla provident, quibusdam, consectetur, explicabo quae? Ex impedit ipsum sequi molestias libero saepe rerum nesciunt magni quae incidunt reprehenderit nam delectus laboriosam facere mollitia, possimus beatae similique doloribus nobis a. Quos temporibus animi totam nihil dolorem!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+            autem ullam soluta delectus dolorem quaerat! Nemo distinctio, velit
+            a reiciendis maiores quas voluptates, deserunt natus, dolores
+            consectetur alias dolorum provident. Dolore repudiandae praesentium
+            consequatur, dignissimos magni, fuga quia soluta officiis, illo
+            eligendi ipsam asperiores eveniet autem a hic pariatur provident?
+            Magnam totam id perferendis voluptatibus eum nemo consequatur non
+            animi impedit deserunt iste at nulla provident, quibusdam,
+            consectetur, explicabo quae? Ex impedit ipsum sequi molestias libero
+            saepe rerum nesciunt magni quae incidunt reprehenderit nam delectus
+            laboriosam facere mollitia, possimus beatae similique doloribus
+            nobis a. Quos temporibus animi totam nihil dolorem!
           </p>
-          
+
           <h2 className="text-3xl font-extrabold">Heading Lorem</h2>
           <p className="text-muted-foreground mt-2 text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum autem ullam soluta delectus dolorem quaerat! Nemo distinctio, velit a reiciendis maiores quas voluptates, deserunt natus, dolores consectetur alias dolorum provident. Dolore repudiandae praesentium consequatur, dignissimos magni, fuga quia soluta officiis, illo eligendi ipsam asperiores eveniet autem a hic pariatur provident? Magnam totam id perferendis voluptatibus eum nemo consequatur non animi impedit deserunt iste at nulla provident, quibusdam, consectetur, explicabo quae? Ex impedit ipsum sequi molestias libero saepe rerum nesciunt magni quae incidunt reprehenderit nam delectus laboriosam facere mollitia, possimus beatae similique doloribus nobis a. Quos temporibus animi totam nihil dolorem!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+            autem ullam soluta delectus dolorem quaerat! Nemo distinctio, velit
+            a reiciendis maiores quas voluptates, deserunt natus, dolores
+            consectetur alias dolorum provident. Dolore repudiandae praesentium
+            consequatur, dignissimos magni, fuga quia soluta officiis, illo
+            eligendi ipsam asperiores eveniet autem a hic pariatur provident?
+            Magnam totam id perferendis voluptatibus eum nemo consequatur non
+            animi impedit deserunt iste at nulla provident, quibusdam,
+            consectetur, explicabo quae? Ex impedit ipsum sequi molestias libero
+            saepe rerum nesciunt magni quae incidunt reprehenderit nam delectus
+            laboriosam facere mollitia, possimus beatae similique doloribus
+            nobis a. Quos temporibus animi totam nihil dolorem!
           </p>
         </div>
       </div>
@@ -76,4 +118,6 @@ const Blogpost = ({ post = defaultPost }: { post?: BlogPostData }) => {
   );
 };
 
-export default Blogpost;
+export default function Page() {
+  return <Blogpost post={defaultPost} />;
+}

@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const members = [
@@ -53,7 +54,7 @@ const Team = () => {
           </div>
           <div className="mt-6 sm:mt-0">
             <p>
-              The people behind every Eternal Clover Studio's project. We're small, scrappy, and obsessed with making games that feel alive
+              The people behind every Eternal Clover Studio&apos;s project. We&apos;re small, scrappy, and obsessed with making games that feel alive
             </p>
           </div>
         </div>
@@ -61,7 +62,7 @@ const Team = () => {
           <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {members.map((member, index) => (
               <div key={index} className="group overflow-hidden">
-                <img
+                <Image
                   className="h-96 w-full rounded-md object-cover object-top grayscale transition-all duration-500 hover:grayscale-0 group-hover:h-[22.5rem] group-hover:rounded-xl"
                   src={member.avatar}
                   alt="team member"
