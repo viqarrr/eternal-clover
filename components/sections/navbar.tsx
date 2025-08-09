@@ -6,9 +6,7 @@ import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
@@ -21,12 +19,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { scrollToElement } from "@/utils/utils";
 
 const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const [scrollTarget, setScrollTarget] = useState<string | null>(null);
-  
+
   const isHome = pathname === "/";
 
   useEffect(() => {
@@ -35,11 +34,6 @@ const Navbar = () => {
       setScrollTarget(null);
     }
   }, [isHome, scrollTarget]);
-
-  const scrollToElement = (id: string) => {
-    const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
 
   const handleNavClick = (targetId: string) => {
     if (isHome) {
@@ -50,58 +44,69 @@ const Navbar = () => {
     }
   };
 
-
   return (
     <section className="py-4">
       <div className="container">
         <nav className="flex items-center justify-between">
-          <a
-            href="https://www.shadcnblocks.com"
-            className="flex items-center gap-2"
-          >
-            logo
-          </a>
-          <NavigationMenu className="hidden lg:block">
+          <Link href={"/"} className="flex items-center gap-2">
+            <Image
+              src={"/logo-no-bg.svg"}
+              alt={"logo"}
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-fit max-h-8"
+            />
+            <span className="text-lg font-semibold tracking-tighter">
+              Eternal Clover
+            </span>
+          </Link>
+          <NavigationMenu className="hidden lg:block cursor-pointer">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuLink
-                  href="/"
-                  className={navigationMenuTriggerStyle()}
-                >
-                  Home
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
+                <div
+                  className="mx-4 text-sm font-medium relative group"
                   onClick={() => handleNavClick("about")}
-                  className={navigationMenuTriggerStyle()}
                 >
                   About
-                </NavigationMenuLink>
+                  <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </div>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink
+                <div
+                  className="mx-4 text-sm font-medium relative group"
                   onClick={() => handleNavClick("games")}
-                  className={navigationMenuTriggerStyle()}
                 >
                   Games
-                </NavigationMenuLink>
+                  <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </div>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink
+                <div
+                  className="mx-4 text-sm font-medium relative group"
                   onClick={() => handleNavClick("blogs")}
-                  className={navigationMenuTriggerStyle()}
                 >
                   Blogs
-                </NavigationMenuLink>
+                  <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </div>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink
+                <div
+                  className="mx-4 text-sm font-medium relative group"
                   onClick={() => handleNavClick("team")}
-                  className={navigationMenuTriggerStyle()}
                 >
                   Team
-                </NavigationMenuLink>
+                  <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </div>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <div
+                  className="mx-4 text-sm font-medium relative group"
+                  onClick={() => handleNavClick("contact")}
+                >
+                  Contact
+                  <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </div>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
@@ -114,54 +119,53 @@ const Navbar = () => {
             <SheetContent side="top" className="max-h-screen overflow-auto">
               <SheetHeader>
                 <SheetTitle>
-                  <a
-                    href="https://www.shadcnblocks.com"
-                    className="flex items-center gap-2"
-                  >
+                  <Link href="/" className="flex items-center gap-2">
                     <Image
-                      src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg"
-                      className="max-h-8"
-                      alt="Shadcn UI Navbar"
+                      src={"/logo-no-bg.svg"}
+                      alt={"logo"}
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      className="w-fit max-h-8"
                     />
                     <span className="text-lg font-semibold tracking-tighter">
-                      Shadcnblocks.com
+                      Eternal Clover
                     </span>
-                  </a>
+                  </Link>
                 </SheetTitle>
               </SheetHeader>
               <div className="flex flex-col p-4">
                 <div className="flex flex-col gap-6">
-                  <Link
-                    href={"/"}
+                  <div
                     onClick={() => handleNavClick("about")}
                     className="font-medium"
                   >
-                    Home
-                  </Link>
-                  <a
-                    onClick={() => handleNavClick("about")}
-                    className="font-medium"
-                  >
-                    Contact
-                  </a>
-                  <a
+                    About
+                  </div>
+                  <div
                     onClick={() => handleNavClick("games")}
                     className="font-medium"
                   >
                     Games
-                  </a>
-                  <a
+                  </div>
+                  <div
                     onClick={() => handleNavClick("blogs")}
                     className="font-medium"
                   >
                     Blogs
-                  </a>
-                  <a
+                  </div>
+                  <div
                     onClick={() => handleNavClick("team")}
                     className="font-medium"
                   >
                     Team
-                  </a>
+                  </div>
+                  <div
+                    onClick={() => handleNavClick("contact")}
+                    className="font-medium"
+                  >
+                    Contact
+                  </div>
                 </div>
               </div>
             </SheetContent>

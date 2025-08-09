@@ -12,9 +12,13 @@ import {structureTool} from 'sanity/structure'
 import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
+import Logo from './components/sanity/logo'
 
 export default defineConfig({
   basePath: '/admin',
+  name: 'default',
+  icon: Logo,
+  title: 'Eternal Clover Studio',
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
