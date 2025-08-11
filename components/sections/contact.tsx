@@ -55,7 +55,7 @@ const Contacts = ({ sectionData, contacts }: ContactsProps) => {
                 {contact.description}
               </p>
               <a
-                href={`mailto:${contact.url}`}
+                href={contact.label == 'Email' ? `mailto:${contact.url}` : `${contact.url}`}
                 className="font-semibold hover:underline"
               >
                 {contact.linkText}
