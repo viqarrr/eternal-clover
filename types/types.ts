@@ -1,4 +1,3 @@
-import { IconName } from "@/utils/utils";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { PortableTextBlock } from "@sanity/types";
 
