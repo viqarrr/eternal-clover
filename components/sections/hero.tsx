@@ -23,7 +23,7 @@ const Hero = ({
   },
 }: HeroProps) => {
   return (
-    <section className="bg-background py-20 lg:py-32">
+    <section className="bg-background py-32 lg:py-32">
       <div className="container flex flex-col items-center gap-10 lg:my-0 lg:flex-row">
         <motion.div
           className="flex flex-col gap-7 lg:w-2/3"

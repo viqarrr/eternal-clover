@@ -24,7 +24,7 @@ const About = ({
       <div className="mx-auto max-w-5xl px-6">
         <div className="grid gap-6 md:grid-cols-2 md:gap-12">
           <motion.h2
-            className="text-4xl font-medium"
+            className="text-4xl font-semibold tracking-tight sm:text-5xl mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
