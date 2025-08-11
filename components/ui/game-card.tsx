@@ -3,6 +3,7 @@ import { ChevronsRight } from "lucide-react";
 import Link from "next/link";
 import { GameSection } from "@/types/types";
 import { urlFor } from "@/sanity/lib/image";
+import { formatImage } from "@/utils/utils";
 
 interface GameCardProps {
   gameData: GameSection;
@@ -14,24 +15,20 @@ function formatPlatform(platforms: string[]) {
     .join(platforms.length > 1 ? " | " : "");
 }
 
-
 const GameCard = ({ gameData }: GameCardProps) => {
-  const imageUrl = urlFor(gameData.thumbnail).width(550).height(300).dpr(2).quality(80).url()
-  const blurUrl = urlFor(gameData.thumbnail).width(20).quality(20).url()
+  const imageUrl = formatImage(gameData.thumbnail, 550, 300);
 
   return (
     <>
       <div className="w-[550px] relative mt-4 h-[300px] group mx-auto dark:bg-black  bg-white dark:border-0 border overflow-hidden rounded-md dark:text-white text-black ">
         <figure className="w-full h-full rounded-md  overflow-hidden">
           <Image
-            src={
-              imageUrl
-            }
+            src={imageUrl.full}
             alt={gameData.slug.current}
             width={550}
             height={300}
             placeholder="blur"
-            blurDataURL={blurUrl}
+            blurDataURL={imageUrl.blur}
             className="h-full w-full scale-98 group-hover:scale-100 rounded-lg object-cover transition-all duration-300"
           />
         </figure>

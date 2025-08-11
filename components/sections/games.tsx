@@ -16,6 +16,7 @@ const Games = async ({
   games,
   button
 }: GamesProps) => {
+
   return (
     <section id="games" className="py-32">
       <div className="container">
@@ -26,7 +27,7 @@ const Games = async ({
                 {sectionData.subheading}
               </Badge>
             )}
-            <h2 className="text-3xl font-medium md:text-5xl">
+            <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl mb-6">
               {sectionData.heading}
             </h2>
 

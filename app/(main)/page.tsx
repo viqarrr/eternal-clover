@@ -2,13 +2,13 @@ import Hero from "@/components/sections/hero";
 import About from "@/components/sections/about";
 import Games from "@/components/sections/games";
 import Blogs from "@/components/sections/blog";
-import Teams from "@/components/sections/team";
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
-import { BlogSection, GameSection, SectionBase } from "@/types/types";
+import { BlogSection, GameSection, SectionBase, Service } from "@/types/types";
 import Contacts from "@/components/sections/contact";
+import Services from "@/components/sections/services";
 
-type SectionKeys = "hero" | "about" | "games" | "blogs" | "team" | "contact";
+type SectionKeys = "hero" | "about" | "services" | "games" | "blogs" | "contact";
 
 type Sections = {
   [K in SectionKeys]: SectionBase;
@@ -16,7 +16,7 @@ type Sections = {
 
 const SECTIONS_QUERY = `*[
   _type == "section"
-]{...}`;
+]`;
 
 const BLOGS_QUERY = `*[
   _type == "blog" 
@@ -28,6 +28,9 @@ const GAMES_QUERY = `*[
   && defined(slug.current)
 ][0...4]{_id, title, thumbnail, platform, slug}`;
 
+const SERVICES_QUERY = `*[_type == "service"] | order(_updatedAt asc)`;
+
+
 const options = { next: { revalidate: 30 } };
 
 export default async function Home() {
@@ -36,10 +39,9 @@ export default async function Home() {
     {},
     options
   );
-
   const blogsData = await client.fetch<BlogSection[]>(BLOGS_QUERY, {}, options);
-
   const gamesData = await client.fetch<GameSection[]>(GAMES_QUERY, {}, options);
+  const servicesData = await client.fetch<Service[]>(SERVICES_QUERY, {}, options);
 
   const sections: Sections = Object.fromEntries(
     sectionsData.map((section) => [
@@ -58,6 +60,7 @@ export default async function Home() {
     <>
       <Hero sectionData={sections["hero"]} />
       <About sectionData={sections["about"]} />
+      <Services sectionData={sections["services"]} services={servicesData} />
       <Games
         sectionData={sections["games"]}
         games={gamesData}
@@ -74,7 +77,6 @@ export default async function Home() {
           url: "/blogs",
         }}
       />
-      <Teams sectionData={sections["team"]} />
       <Contacts sectionData={sections["contact"]} />
     </>
   );

@@ -1,3 +1,4 @@
+import { Gamepad2, Palette, Sparkles } from "lucide-react"; // contoh icon dari lucide-react
 import { urlFor } from "@/sanity/lib/image";
 import { ImageUrl } from "@/types/types";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";

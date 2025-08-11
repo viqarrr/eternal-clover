@@ -45,8 +45,7 @@ const GameDetail = async ({ params }: { params: Promise<{ slug: string }> }) => 
   const screenshotsUrl = game.screenshots.map((screenshot) =>
     formatImage(screenshot, 550, 300)
   );
-
-  console.log(game);
+  
   return (
     <>
       <div className="relative w-full h-svh overflow-hidden">

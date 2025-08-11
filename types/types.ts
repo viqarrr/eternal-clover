@@ -1,3 +1,4 @@
+import { IconName } from "@/utils/utils";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { PortableTextBlock } from "@sanity/types";
 
@@ -57,6 +58,12 @@ export interface BlogSection extends BaseContent {
 export interface Blog extends BlogSection {
   body: PortableText;
   publishedAt: Date;
+}
+
+// Sevice type
+export interface Service extends BaseContent {
+  icon: SanityImage;
+  description: string;
 }
 
 // Team type

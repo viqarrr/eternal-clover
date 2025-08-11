@@ -23,16 +23,17 @@ const Blogs = async ({
   blogs,
   button
 }: BlogsSectionProps) => {
+
   return (
     <section id="blogs" className="py-32">
       <div className="container mx-auto flex flex-col items-center gap-16 lg:px-16">
         <div className="text-center">
-          {'subheading' in sectionData && 
+          {"subheading" in sectionData && 
           (<Badge variant="secondary" className="mb-6">
             {sectionData.subheading}
           </Badge>) 
           }
-          <h2 className="mb-3 text-3xl font-semibold text-pretty md:mb-4 md:text-4xl lg:mb-6 lg:max-w-3xl lg:text-5xl">
+          <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl mb-6">
             {sectionData.heading}
           </h2>
           <p className="mb-8 text-muted-foreground md:text-base lg:text-lg">

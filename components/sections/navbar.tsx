@@ -75,6 +75,15 @@ const Navbar = () => {
               <NavigationMenuItem>
                 <div
                   className="mx-4 text-sm font-medium relative group"
+                  onClick={() => handleNavClick("services")}
+                >
+                  Services
+                  <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </div>
+              </NavigationMenuItem>              
+              <NavigationMenuItem>
+                <div
+                  className="mx-4 text-sm font-medium relative group"
                   onClick={() => handleNavClick("games")}
                 >
                   Games
@@ -87,15 +96,6 @@ const Navbar = () => {
                   onClick={() => handleNavClick("blogs")}
                 >
                   Blogs
-                  <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
-                </div>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <div
-                  className="mx-4 text-sm font-medium relative group"
-                  onClick={() => handleNavClick("team")}
-                >
-                  Team
                   <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
                 </div>
               </NavigationMenuItem>
@@ -143,6 +143,12 @@ const Navbar = () => {
                     About
                   </div>
                   <div
+                    onClick={() => handleNavClick("services")}
+                    className="font-medium"
+                  >
+                    Services
+                  </div>                  
+                  <div
                     onClick={() => handleNavClick("games")}
                     className="font-medium"
                   >
@@ -153,12 +159,6 @@ const Navbar = () => {
                     className="font-medium"
                   >
                     Blogs
-                  </div>
-                  <div
-                    onClick={() => handleNavClick("team")}
-                    className="font-medium"
-                  >
-                    Team
                   </div>
                   <div
                     onClick={() => handleNavClick("contact")}

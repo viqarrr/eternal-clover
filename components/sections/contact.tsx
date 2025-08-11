@@ -22,11 +22,11 @@ const Contacts = async ({ sectionData }: { sectionData: SectionBase }) => {
   return (
     <section id="contact" className="bg-background py-32">
       <div className="container">
-        <div className="mb-8 text-center">
+        <div className="mb-24 text-center">
           <Badge variant="secondary" className="mb-6">
             {sectionData.subheading}
           </Badge>
-          <h2 className="mb-3 text-3xl font-semibold text-pretty md:mb-4 md:text-4xl lg:mb-6 lg:text-5xl">
+          <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl mb-6">
             {sectionData.heading}
           </h2>
           <p className="text-muted-foreground md:text-base lg:text-lg text-lg">

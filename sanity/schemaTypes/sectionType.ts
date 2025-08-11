@@ -9,7 +9,6 @@ export const sectionType = defineType({
       name: "title",
       type: "string",
       validation: (rule) => rule.required(),
-      readOnly: true,
     }),
     defineField({
       name: "heading",
