@@ -3,8 +3,8 @@
 import type React from "react";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SanityImage, SectionBase, Service } from "@/types/types";
-import Image from "next/image";
 import { formatImage } from "@/utils/utils";
 
 interface ServicesProps {

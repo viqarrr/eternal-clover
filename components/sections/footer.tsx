@@ -12,16 +12,16 @@ const links = [
     href: "about",
   },
   {
+    title: "Services",
+    href: "services",
+  },
+  {
     title: "Games",
     href: "games",
   },
   {
     title: "Blogs",
     href: "blogs",
-  },
-  {
-    title: "Team",
-    href: "team",
   },
   {
     title: "Contact",
