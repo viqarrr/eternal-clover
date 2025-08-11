@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -18,21 +21,22 @@ interface BlogsSectionProps {
   button?: ButtonType;
 }
 
-const Blogs = async ({
-  sectionData,
-  blogs,
-  button
-}: BlogsSectionProps) => {
-
+const Blogs = ({ sectionData, blogs, button }: BlogsSectionProps) => {
   return (
     <section id="blogs" className="py-32">
       <div className="container mx-auto flex flex-col items-center gap-16 lg:px-16">
-        <div className="text-center">
-          {"subheading" in sectionData && 
-          (<Badge variant="secondary" className="mb-6">
-            {sectionData.subheading}
-          </Badge>) 
-          }
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: false }}
+        >
+          {"subheading" in sectionData && (
+            <Badge variant="secondary" className="mb-6">
+              {sectionData.subheading}
+            </Badge>
+          )}
           <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl mb-6">
             {sectionData.heading}
           </h2>
@@ -47,8 +51,14 @@ const Blogs = async ({
               </Link>
             </Button>
           )}
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        </motion.div>
+        <motion.div
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: false }}
+        >
           {blogs.map((blog) => (
             <Card
               key={blog._id}
@@ -94,7 +104,7 @@ const Blogs = async ({
               </CardFooter>
             </Card>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import GameCard from "@/components/ui/game-card";
@@ -11,17 +14,18 @@ interface GamesProps {
   button?: ButtonType;
 }
 
-const Games = async ({
-  sectionData,
-  games,
-  button
-}: GamesProps) => {
-
+const Games = ({ sectionData, games, button }: GamesProps) => {
   return (
     <section id="games" className="py-32">
       <div className="container">
         <div className="flex w-full flex-col items-center">
-          <div className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:max-w-3xl md:text-center">
+          <motion.div
+            className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:max-w-3xl md:text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: false }}
+          >
             {"subheading" in sectionData && (
               <Badge variant="secondary" className="mb-6">
                 {sectionData.subheading}
@@ -42,11 +46,19 @@ const Games = async ({
                 </Link>
               </Button>
             )}
-          </div>
+          </motion.div>
         </div>
         <div className="mx-auto mt-20 flex max-w-5xl flex-wrap justify-center gap-6">
           {games.map((gameData, idx) => (
-            <GameCard key={idx} gameData={gameData} />
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: false }}
+            >
+              <GameCard gameData={gameData} />
+            </motion.div>
           ))}
         </div>
       </div>

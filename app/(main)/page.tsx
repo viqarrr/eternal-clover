@@ -4,7 +4,7 @@ import Games from "@/components/sections/games";
 import Blogs from "@/components/sections/blog";
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/client";
-import { BlogSection, GameSection, SectionBase, Service } from "@/types/types";
+import { BlogSection, Contact, GameSection, SectionBase, Service } from "@/types/types";
 import Contacts from "@/components/sections/contact";
 import Services from "@/components/sections/services";
 
@@ -30,6 +30,8 @@ const GAMES_QUERY = `*[
 
 const SERVICES_QUERY = `*[_type == "service"] | order(_updatedAt asc)`;
 
+const CONTACTS_QUERY = `*[ _type == "contact" ]`;
+
 
 const options = { next: { revalidate: 30 } };
 
@@ -39,9 +41,10 @@ export default async function Home() {
     {},
     options
   );
+  const servicesData = await client.fetch<Service[]>(SERVICES_QUERY, {}, options);
   const blogsData = await client.fetch<BlogSection[]>(BLOGS_QUERY, {}, options);
   const gamesData = await client.fetch<GameSection[]>(GAMES_QUERY, {}, options);
-  const servicesData = await client.fetch<Service[]>(SERVICES_QUERY, {}, options);
+  const contactsData = await client.fetch<Contact[]>(CONTACTS_QUERY, {}, options);
 
   const sections: Sections = Object.fromEntries(
     sectionsData.map((section) => [
@@ -77,7 +80,7 @@ export default async function Home() {
           url: "/blogs",
         }}
       />
-      <Contacts sectionData={sections["contact"]} />
+      <Contacts sectionData={sections["contact"]} contacts={contactsData} />
     </>
   );
 }

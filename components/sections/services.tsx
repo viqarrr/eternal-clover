@@ -24,7 +24,7 @@ const Services = ({ sectionData, services }: ServicesProps) => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
           >
             {services.map((feature, index) => {
               const iconUrl = formatImage(feature.icon, 42, 42);
@@ -63,7 +63,7 @@ const Services = ({ sectionData, services }: ServicesProps) => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
           >
             <Badge className="mb-4 px-3 py-1 text-sm" variant="secondary">
               {sectionData.subheading}

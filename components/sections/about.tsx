@@ -1,10 +1,11 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
+import { PortableText } from "next-sanity";
 import { Button } from "@/components/ui/button";
 import { scrollToElement } from "@/utils/utils";
 import { SectionBase } from "@/types/types";
-import { ChevronRight } from "lucide-react";
-import { PortableText } from "next-sanity";
 
 interface AboutProps {
   sectionData: SectionBase;
@@ -22,10 +23,25 @@ const About = ({
     <section id="about" className="py-16 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
         <div className="grid gap-6 md:grid-cols-2 md:gap-12">
-          <h2 className="text-4xl font-medium">{sectionData.heading}</h2>
-          <div className="space-y-6">
-            {sectionData.descriptionBlock &&
-            <PortableText value={sectionData?.descriptionBlock} />}
+          <motion.h2
+            className="text-4xl font-medium"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: false }}
+          >
+            {sectionData.heading}
+          </motion.h2>
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: false }}
+          >
+            {sectionData.descriptionBlock && (
+              <PortableText value={sectionData?.descriptionBlock} />
+            )}
 
             <Button
               asChild
@@ -38,7 +54,7 @@ const About = ({
                 <ChevronRight className="size-4" />
               </span>
             </Button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
