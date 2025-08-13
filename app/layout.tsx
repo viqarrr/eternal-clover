@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Fredoka, Comfortaa } from "next/font/google";
+import { Toaster } from "sonner";
 
 const fredoka = Fredoka({
   variable: "--font-fredoka",
@@ -52,6 +53,7 @@ export default function RootLayout({
         className={`dark ${fredoka.variable} ${comfortaa.variable} antialiased`}
       >
         {children}
+         <Toaster richColors theme="dark" position="bottom-right" />
       </body>
     </html>
   );
