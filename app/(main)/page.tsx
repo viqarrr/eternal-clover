@@ -28,21 +28,16 @@ const SECTIONS_QUERY = `*[_type == "section"]{
     }
   }
 }`;
-
 const BLOGS_QUERY = `*[
   _type == "blog" 
   && defined(slug.current)
 ]| order(publishedAt desc)[0...3]{_id, title, subtitle, slug, image, body}`;
-
 const GAMES_QUERY = `*[
   _type == "game" 
   && defined(slug.current)
 ][0...4]{_id, title, thumbnail, platform, slug}`;
-
 const SERVICES_QUERY = `*[_type == "service"] | order(_updatedAt asc)`;
-
 const CONTACTS_QUERY = `*[ _type == "contact" ]`;
-
 
 const options = { next: { revalidate: 30 } };
 

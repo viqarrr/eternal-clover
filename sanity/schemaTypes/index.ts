@@ -5,7 +5,8 @@ import { gameType } from "./gameType";
 import { blogType } from "./blogType";
 import { contactType } from "./contactType";
 import { serviceType } from "./serviceType";
+import { privacyPolicyType } from "./privacyPolicyType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [sectionType, pageType, serviceType, gameType, blogType, contactType],
+  types: [sectionType, pageType, serviceType, gameType, blogType, contactType, privacyPolicyType],
 };

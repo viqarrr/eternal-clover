@@ -78,7 +78,6 @@ const Contacts = ({ sectionData, contacts }: ContactProps) => {
       }
 
       const data = await response.json();
-      console.log("Server response:", data);
       if (data.message === "success") {
         toast("Message sent!", {
           description:
@@ -97,7 +96,6 @@ const Contacts = ({ sectionData, contacts }: ContactProps) => {
         throw new Error("Failed to send message");
       }
     } catch (error) {
-      console.error("Component error:", error);
       toast("Message was not delivered!!", {
         description: "Failed to send message. Please try again.",
       });

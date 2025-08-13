@@ -77,11 +77,14 @@ const Footer = () => {
             </div>
           ))}
         </div>
-        <span className="text-muted-foreground block text-center text-sm">
+        <div className="text-muted-foreground block text-center text-sm">
+          <span>
           {" "}
           © {new Date().getFullYear()} Eternal Clover Studio, All rights
-          reserved
-        </span>
+          reserved | 
+          </span>
+          <Link href={"/privacy-policy"} className="hover:underline">Privacy Policy</Link>
+        </div>
       </div>
     </footer>
   );
