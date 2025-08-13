@@ -14,9 +14,20 @@ type Sections = {
   [K in SectionKeys]: SectionBase;
 };
 
-const SECTIONS_QUERY = `*[
-  _type == "section"
-]`;
+const SECTIONS_QUERY = `*[_type == "section"]{
+  _id,
+  title,
+  heading,
+  subheading,
+  description,
+  descriptionBlock,
+  companyProfile{
+    asset->{
+      url,
+      filename
+    }
+  }
+}`;
 
 const BLOGS_QUERY = `*[
   _type == "blog" 
@@ -55,6 +66,7 @@ export default async function Home() {
         subheading: section.subheading,
         description: section.description,
         descriptionBlock: section.descriptionBlock,
+        companyProfile: section.companyProfile,
       },
     ])
   );

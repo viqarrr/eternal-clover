@@ -80,7 +80,7 @@ const Navbar = () => {
                   Services
                   <span className="absolute left-0 -bottom-0.5 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
                 </div>
-              </NavigationMenuItem>              
+              </NavigationMenuItem>
               <NavigationMenuItem>
                 <div
                   className="mx-4 text-sm font-medium relative group"
@@ -110,6 +110,13 @@ const Navbar = () => {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+          <div className="hidden items-center gap-4 lg:flex">
+            <Button>
+              <a href="https://drive.google.com/drive/folders/1n_6Nra-e9palkZFrPsWn0iW2BM9q7CxD?usp=sharing">
+                Press Kit
+              </a>
+            </Button>
+          </div>
           <Sheet>
             <SheetTrigger asChild className="lg:hidden">
               <Button variant="outline" size="icon">
@@ -147,7 +154,7 @@ const Navbar = () => {
                     className="font-medium"
                   >
                     Services
-                  </div>                  
+                  </div>
                   <div
                     onClick={() => handleNavClick("games")}
                     className="font-medium"
@@ -166,6 +173,13 @@ const Navbar = () => {
                   >
                     Contact
                   </div>
+                </div>
+                <div className="mt-6 flex flex-col gap-4">
+                  <Button>
+                    <a href="https://drive.google.com/drive/folders/1n_6Nra-e9palkZFrPsWn0iW2BM9q7CxD?usp=sharing">
+                      Press Kit
+                    </a>
+                  </Button>
                 </div>
               </div>
             </SheetContent>

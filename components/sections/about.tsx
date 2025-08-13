@@ -1,23 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { Download } from "lucide-react";
 import { PortableText } from "next-sanity";
 import { Button } from "@/components/ui/button";
-import { scrollToElement } from "@/utils/utils";
 import { SectionBase } from "@/types/types";
 
 interface AboutProps {
   sectionData: SectionBase;
-  button?: {
-    text: string;
-    targetElement: string;
-  };
+  buttonText?: string;
 }
 
 const About = ({
   sectionData,
-  button = { text: "Explore Our Games", targetElement: "games" },
+  buttonText = "Download Company Profile",
 }: AboutProps) => {
   return (
     <section id="about" className="py-16 md:py-32">
@@ -42,17 +38,16 @@ const About = ({
             {sectionData.descriptionBlock && (
               <PortableText value={sectionData?.descriptionBlock} />
             )}
-
-            <Button
-              asChild
-              size="sm"
-              className="gap-1 pr-1.5 cursor-pointer"
-              onClick={() => scrollToElement(`/${button.targetElement}`)}
-            >
-              <span>
-                {button.text}
-                <ChevronRight className="size-4" />
-              </span>
+            <Button asChild size="sm" className="gap-1 pr-1.5 cursor-pointer">
+              <a
+                href={`${sectionData.companyProfile?.asset?.url}?dl`}
+                download
+                target="_blank"
+                className="flex items-center"
+              >
+                <Download className="size-4" />
+                {buttonText}
+              </a>
             </Button>
           </motion.div>
         </div>

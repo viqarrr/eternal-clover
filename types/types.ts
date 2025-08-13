@@ -20,6 +20,12 @@ export interface SectionBase {
   subheading?: string;
   description?: string;
   descriptionBlock?: PortableText;
+  companyProfile?: {
+    asset?: {
+      url?: string;
+      filename?: string;
+    };
+  };
 }
 
 export interface PageBase {

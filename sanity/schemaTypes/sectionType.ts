@@ -72,5 +72,29 @@ export const sectionType = defineType({
           return true;
         }),
     }),
+    defineField({
+      name: "companyProfile",
+      title: "Company Profile",
+      type: "file",
+      options: {
+        accept: ".pdf",
+      },
+      hidden: ({ parent }) => {
+        const title = parent?.title;
+        if (typeof title !== "string") return true;
+        return title.toLowerCase() !== "about";
+      },
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const parent = context.parent as { title?: string };
+          const title = parent?.title?.toLowerCase();
+
+          if (title === "about" && !value) {
+            return "Required";
+          }
+
+          return true;
+        }),
+    }),
   ],
 });
