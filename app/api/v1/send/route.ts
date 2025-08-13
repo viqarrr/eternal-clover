@@ -21,15 +21,11 @@ export async function POST(req: Request) {
     });
 
     if (error) {
-      console.error("Resend error:", JSON.stringify(error, null, 2));
-      console.log("Error sebelum processing request:", error);
-
       return NextResponse.json({ error }, { status: 500 });
     }
 
     return NextResponse.json({ data, message: "success" }, { status: 200 });
   } catch (error) {
-    console.log("Error processing request:", error);
     return NextResponse.json(
       { error: `Failed to process request ${error}` },
       { status: 500 }
