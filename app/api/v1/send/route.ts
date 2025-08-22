@@ -1,4 +1,3 @@
-import EmailTemplate from "@/components/contact/email-template";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { v4 as uuid } from "uuid";

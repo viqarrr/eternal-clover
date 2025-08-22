@@ -15,9 +15,11 @@ export interface BaseContent {
 }
 
 export interface SectionBase {
+  isVisible: boolean;
   title: string;
   heading: string;
   subheading?: string;
+  backgroundImage?: SanityImage;
   description?: string;
   descriptionBlock?: PortableText;
   companyProfile?: {
@@ -77,6 +79,11 @@ export interface Team extends BaseContent {
   position: string;
   photo: SanityImage;
   instagramUrl: string;
+}
+// Partner type
+export interface Partner extends BaseContent {
+  name: string;
+  logo: SanityImage;
 }
 
 // Contact type

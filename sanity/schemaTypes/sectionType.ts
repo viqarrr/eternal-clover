@@ -6,6 +6,12 @@ export const sectionType = defineType({
   type: "document",
   fields: [
     defineField({
+      name: "isVisible",
+      title: "Show Section?",
+      type: "boolean",
+      initialValue: true,
+    }),
+    defineField({
       name: "title",
       type: "string",
       validation: (rule) => rule.required(),
@@ -26,6 +32,26 @@ export const sectionType = defineType({
         return title.toLowerCase() === "about";
       },
       type: "string",
+    }),
+    defineField({
+      name: "backgroundImage",
+      type: "image",
+      hidden: ({ parent }) => {
+        const title = parent?.title;
+        if (typeof title !== "string") return true;
+        return title.toLowerCase() !== "hero";
+      },
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const parent = context.parent as { title?: string };
+          const title = parent?.title?.toLowerCase();
+
+          if (title === "hero" && !value) {
+            return "Required";
+          }
+
+          return true;
+        }),
     }),
     defineField({
       name: "descriptionBlock",

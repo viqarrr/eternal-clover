@@ -1,72 +1,111 @@
-import Image from "next/image";
+"use client";
 import Link from "next/link";
-import { Instagram } from "lucide-react";
+import { motion, spring } from "framer-motion";
 import { SectionBase, Team } from "@/types/types";
 import { formatImage } from "@/utils/utils";
-import { client } from "@/sanity/client";
+import { Instagram } from "lucide-react";
 
 interface TeamProps {
   sectionData: SectionBase;
+  teamData: Team[];
 }
 
-const TEAM_QUERY = `*[ _type == "team" ]`;
-const options = { next: { revalidate: 30 } };
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+};
 
-const Teams = async ({ sectionData }: TeamProps) => {
-  const teamData = await client.fetch<Team[]>(TEAM_QUERY, {}, options);
+const item = {
+  hidden: { opacity: 0, scale: 0.9 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: spring,
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
 
+const Teams = ({ sectionData, teamData }: TeamProps) => {
   return (
     <section
       id="team"
-      className="bg-gray-50 py-16 md:py-32 dark:bg-transparent"
+      className="bg-gray-50 py-16 md:py-32 dark:bg-transparent w-full flex justify-center"
     >
-      <div className="mx-auto max-w-5xl border-t px-6">
-        <span className="text-caption -ml-6 -mt-3.5 block w-max px-6 bg-background">
-          {sectionData.subheading}
-        </span>
-        <div className="mt-12 gap-4 sm:grid sm:grid-cols-2 md:mt-24">
-          <div className="sm:w-2/5">
-            <h2 className="text-3xl font-bold sm:text-4xl">
+      <div className="relative overflow-hidden max-w-5xl py-24 sm:py-32">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-gradient-radial from-primary/20 via-primary/5 to-transparent blur-3xl"
+        />
+
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mx-auto max-w-2xl text-center mb-16"
+          >
+            <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
+              {sectionData.subheading}
+            </div>
+            <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
               {sectionData.heading}
-            </h2>
-          </div>
-          <div className="mt-6 sm:mt-0">{sectionData.description}</div>
-        </div>
-        <div className="mt-12 md:mt-24">
-          <div className="w-full flex flex-wrap justify-center gap-6">
-            {teamData.map((member) => (
-              <div key={member._id} className="group overflow-hidden md:w-75 w-96">
-                <Image
-                  src={formatImage(member.photo, 800, 1200).full}
-                  alt={member.name}
-                  width={826}
-                  height={1239}
-                  placeholder="blur"
-                  blurDataURL={formatImage(member.photo, 800, 1200).blur}
-                  className="h-[400px] w-full rounded-md object-cover object-top transition-all duration-500 md:group-hover:h-[22.5rem] group-hover:rounded-xl"
-                />
-                <div className="px-2 pt-2 sm:pb-0 sm:pt-4">
-                  <div className="flex justify-between">
-                    <h3 className="text-title text-base font-medium transition-all duration-500 group-hover:tracking-wider">
-                      {member.name}
-                    </h3>
-                  </div>
-                  <div className="mt-1 flex items-center justify-between">
-                    <span className="text-primary inline-block translate-y-0 md:translate-y-6 text-sm opacity-100 md:opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                      {member.position}
-                    </span>
-                    <Link
-                      href={member.instagramUrl}
-                      className="text-muted-foreground group-hover:text-primary inline-block translate-y-0 md:translate-y-8 text-sm tracking-wide opacity-100 md:opacity-0 transition-all duration-500 hover:underline group-hover:translate-y-0 group-hover:opacity-100"
-                    >
-                      {" "}
-                      <Instagram className="size-5" />
-                    </Link>
-                  </div>
+            </p>
+            <p className="mt-6 text-lg leading-8 text-muted-foreground">
+              {sectionData.description}
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="mx-auto grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {teamData.map((member, index) => (
+              <motion.div
+                key={index}
+                variants={item}
+                whileHover={{ y: -10 }}
+                className="relative group"
+              >
+                <div className="relative aspect-square overflow-hidden rounded-2xl bg-card">
+                  <motion.img
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
+                    src={formatImage(member.photo, 800, 1200).full}
+                    alt={member.name}
+                    className="h-full w-full object-cover transition-transform duration-300"
+                  />
                 </div>
-              </div>
+                <div className="mt-4 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold">{member.name}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {member.position}
+                    </p>
+                  </div>
+                  <Link
+                    href={member.instagramUrl}
+                    className="text-muted-foreground inline-block translate-y-0 md:translate-y-8 text-sm tracking-wide opacity-100 md:opacity-0 transition-all duration-500 hover:underline group-hover:translate-y-0 group-hover:opacity-100"
+                  >
+                    {" "}
+                    <Instagram className="size-5" />
+                  </Link>
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

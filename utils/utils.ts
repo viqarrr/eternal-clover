@@ -1,6 +1,8 @@
+import { ReactNode } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import { ImageUrl } from "@/types/types";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
 
 export const scrollToElement = (id: string) => {
   const el = document.getElementById(id);
@@ -13,3 +15,7 @@ export const formatImage = (img: SanityImageSource, width: number, height:number
     blur: urlFor(img).height(height).quality(20).url(),
   };
 };
+
+export function show(condition?: boolean, children?: ReactNode) {
+  return condition ? children : null;
+}

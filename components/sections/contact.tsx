@@ -97,7 +97,7 @@ const Contacts = ({ sectionData, contacts }: ContactProps) => {
       }
     } catch (error) {
       toast("Message was not delivered!!", {
-        description: "Failed to send message. Please try again.",
+        description: `${error}. Please try again.`,
       });
       setIsLoading(false);
     } finally {
