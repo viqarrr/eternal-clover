@@ -23,10 +23,9 @@ const Hero = ({
     targetElement: "games",
   },
 }: HeroProps) => {
-
   let backgroundUrl;
-  if(sectionData.backgroundImage) backgroundUrl = formatImage(sectionData.backgroundImage, 500, 300);
-  
+  if (sectionData.backgroundImage)
+    backgroundUrl = formatImage(sectionData.backgroundImage, 500, 300);
 
   return (
     <section className="relative overflow-hidden py-32">

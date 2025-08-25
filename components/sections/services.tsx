@@ -29,9 +29,27 @@ interface ServiceCardProps {
 }
 
 const Services = ({ sectionData, services }: ServicesProps) => {
+  let backgroundUrl;
+  if (sectionData.backgroundImage)
+    backgroundUrl = formatImage(sectionData.backgroundImage, 500, 300);
+
   return (
     <section className="w-full py-16 md:py-32 relative overflow-hidden">
-      <div className="container mx-auto max-w-5xl px-6">
+      {backgroundUrl && (
+        <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
+          <Image
+            alt="background"
+            src={backgroundUrl?.full as string}
+            width={0}
+            height={0}
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={backgroundUrl?.blur as string}
+            className="absolute inset-0 h-full w-full object-cover [mask-image:radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
+          />
+        </div>
+      )}
+      <div className="relative z-10 container mx-auto max-w-5xl px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -67,12 +85,7 @@ const Services = ({ sectionData, services }: ServicesProps) => {
   );
 };
 
-const ServiceCard = ({
-  title,
-  description,
-  icon,
-  index,
-}: ServiceCardProps) => {
+const ServiceCard = ({ title, description, icon, index }: ServiceCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -135,10 +148,13 @@ const ServiceCard = ({
       >
         <Card className="h-full border-2 border-border/50 bg-primary backdrop-blur-sm overflow-hidden group">
           <CardHeader className="pb-2">
-            <div
-              className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-3"
-            >
-              <Image src={iconUrl.full} alt="service-icon" width={42} height={42} />
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-3">
+              <Image
+                src={iconUrl.full}
+                alt="service-icon"
+                width={42}
+                height={42}
+              />
             </div>
             <CardTitle className="text-xl font-bold">{title}</CardTitle>
           </CardHeader>

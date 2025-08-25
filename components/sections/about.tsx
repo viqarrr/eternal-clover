@@ -5,6 +5,8 @@ import { Download } from "lucide-react";
 import { PortableText } from "next-sanity";
 import { Button } from "@/components/ui/button";
 import { SectionBase } from "@/types/types";
+import Image from "next/image";
+import { formatImage } from "@/utils/utils";
 
 interface AboutProps {
   sectionData: SectionBase;
@@ -15,9 +17,27 @@ const About = ({
   sectionData,
   buttonText = "Download Company Profile",
 }: AboutProps) => {
+  let backgroundUrl;
+  if (sectionData.backgroundImage)
+    backgroundUrl = formatImage(sectionData.backgroundImage, 500, 300);
+
   return (
-    <section id="about" className="py-16 md:py-32">
-      <div className="mx-auto max-w-5xl px-6">
+    <section id="about" className="relative overflow-hidden py-16 md:py-32">
+      {backgroundUrl && (
+        <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
+          <Image
+            alt="background"
+            src={backgroundUrl?.full as string}
+            width={0}
+            height={0}
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={backgroundUrl?.blur as string}
+            className="absolute inset-0 h-full w-full object-cover [mask-image:radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
+          />
+        </div>
+      )}
+      <div className="relative z-10 container mx-auto max-w-5xl px-6">
         <div className="grid gap-6 md:grid-cols-2 md:gap-12">
           <motion.h2
             className="text-4xl font-semibold tracking-tight sm:text-5xl mb-6"

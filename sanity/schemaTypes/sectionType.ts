@@ -36,22 +36,6 @@ export const sectionType = defineType({
     defineField({
       name: "backgroundImage",
       type: "image",
-      hidden: ({ parent }) => {
-        const title = parent?.title;
-        if (typeof title !== "string") return true;
-        return title.toLowerCase() !== "hero";
-      },
-      validation: (rule) =>
-        rule.custom((value, context) => {
-          const parent = context.parent as { title?: string };
-          const title = parent?.title?.toLowerCase();
-
-          if (title === "hero" && !value) {
-            return "Required";
-          }
-
-          return true;
-        }),
     }),
     defineField({
       name: "descriptionBlock",

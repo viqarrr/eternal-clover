@@ -22,9 +22,27 @@ interface BlogsSectionProps {
 }
 
 const Blogs = ({ sectionData, blogs, button }: BlogsSectionProps) => {
+  let backgroundUrl;
+  if ("backgroundImage" in sectionData && sectionData.backgroundImage)
+    backgroundUrl = formatImage(sectionData.backgroundImage, 500, 300);
+
   return (
-    <section id="blogs" className="py-32">
-      <div className="container mx-auto flex flex-col items-center gap-16 lg:px-16">
+    <section id="blogs" className="relative overflow-hidden py-16 md:py-32">
+      {backgroundUrl && (
+        <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
+          <Image
+            alt="background"
+            src={backgroundUrl?.full as string}
+            width={0}
+            height={0}
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={backgroundUrl?.blur as string}
+            className="absolute inset-0 h-full w-full object-cover [mask-image:radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
+          />
+        </div>
+      )}
+      <div className="relative z-10 container mx-auto flex flex-col items-center gap-16 lg:px-16">
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}

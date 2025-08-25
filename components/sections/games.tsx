@@ -7,6 +7,8 @@ import GameCard from "@/components/ui/game-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ButtonType, GameSection, PageBase, SectionBase } from "@/types/types";
+import Image from "next/image";
+import { formatImage } from "@/utils/utils";
 
 interface GamesProps {
   sectionData: SectionBase | PageBase;
@@ -15,9 +17,27 @@ interface GamesProps {
 }
 
 const Games = ({ sectionData, games, button }: GamesProps) => {
+  let backgroundUrl;
+  if ("backgroundImage" in sectionData && sectionData.backgroundImage)
+    backgroundUrl = formatImage(sectionData.backgroundImage, 500, 300);
+
   return (
-    <section id="games" className="py-32">
-      <div className="container">
+    <section id="games" className="relative overflow-hidden py-16 md:py-32">
+      {backgroundUrl && (
+        <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
+          <Image
+            alt="background"
+            src={backgroundUrl?.full as string}
+            width={0}
+            height={0}
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={backgroundUrl?.blur as string}
+            className="absolute inset-0 h-full w-full object-cover [mask-image:radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
+          />
+        </div>
+      )}
+      <div className="relative z-10 container">
         <div className="flex w-full flex-col items-center">
           <motion.div
             className="flex flex-col items-center space-y-4 text-center sm:space-y-6 md:max-w-3xl md:text-center"

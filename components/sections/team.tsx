@@ -4,6 +4,7 @@ import { motion, spring } from "framer-motion";
 import { SectionBase, Team } from "@/types/types";
 import { formatImage } from "@/utils/utils";
 import { Instagram } from "lucide-react";
+import Image from "next/image";
 
 interface TeamProps {
   sectionData: SectionBase;
@@ -35,6 +36,10 @@ const item = {
 };
 
 const Teams = ({ sectionData, teamData }: TeamProps) => {
+  let backgroundUrl;
+  if (sectionData.backgroundImage)
+    backgroundUrl = formatImage(sectionData.backgroundImage, 500, 300);
+
   return (
     <section
       id="team"
@@ -47,8 +52,23 @@ const Teams = ({ sectionData, teamData }: TeamProps) => {
           transition={{ duration: 1.5 }}
           className="absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-gradient-radial from-primary/20 via-primary/5 to-transparent blur-3xl"
         />
-
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        
+        {backgroundUrl && (
+          <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
+            <Image
+              alt="background"
+              src={backgroundUrl?.full as string}
+              width={0}
+              height={0}
+              sizes="100vw"
+              placeholder="blur"
+              blurDataURL={backgroundUrl?.blur as string}
+              className="absolute inset-0 h-full w-full object-cover [mask-image:radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
+            />
+          </div>
+        )}
+        
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -81,8 +101,8 @@ const Teams = ({ sectionData, teamData }: TeamProps) => {
               >
                 <div className="relative aspect-square overflow-hidden rounded-2xl bg-card">
                   <motion.img
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.4 }}
+                    whileHover={{ scale: 1.01 }}
+                    transition={{ duration: 0.2 }}
                     src={formatImage(member.photo, 800, 1200).full}
                     alt={member.name}
                     className="h-full w-full object-cover transition-transform duration-300"

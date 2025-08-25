@@ -25,6 +25,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Contact, SectionBase } from "@/types/types";
+import { formatImage } from "@/utils/utils";
+import Image from "next/image";
 
 interface ContactProps {
   sectionData: SectionBase;
@@ -105,9 +107,27 @@ const Contacts = ({ sectionData, contacts }: ContactProps) => {
     }
   };
 
+  let backgroundUrl;
+  if (sectionData.backgroundImage)
+    backgroundUrl = formatImage(sectionData.backgroundImage, 500, 300);
+
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
-      <div className="container px-4 md:px-6">
+    <section className="relative overflow-hidden w-full py-16 md:py-32 bg-background">
+      {backgroundUrl && (
+        <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
+          <Image
+            alt="background"
+            src={backgroundUrl?.full as string}
+            width={0}
+            height={0}
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL={backgroundUrl?.blur as string}
+            className="absolute inset-0 h-full w-full object-cover [mask-image:radial-gradient(75%_75%_at_center,white,transparent)] opacity-90"
+          />
+        </div>
+      )}
+      <div className="relative z-10 container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
