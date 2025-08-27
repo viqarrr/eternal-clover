@@ -20,7 +20,7 @@ const GameCard = ({ gameData }: GameCardProps) => {
 
   return (
     <>
-      <div className="w-98 md:w-[550px] relative mt-4 h-auto group mx-auto dark:bg-black  bg-white dark:border-0 border overflow-hidden rounded-md text-white">
+      <div className="w-98 md:w-[550px] relative mt-4 h-auto group mx-auto dark:border-0 border overflow-hidden rounded-md text-white">
         <figure className="w-full h-full rounded-md  overflow-hidden">
           <Image
             src={imageUrl.full}
