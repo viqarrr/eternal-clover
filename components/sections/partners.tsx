@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Partner as PartnerType, SectionBase } from "@/types/types";
 import { formatImage } from "@/utils/utils";
 import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
 interface PartnerProps {
   sectionData: SectionBase;
@@ -53,15 +54,13 @@ const Partner = ({ sectionData, partners }: PartnerProps) => {
           </motion.div>
         </div>
         <div className="pt-10 md:pt-16 lg:pt-20">
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-6 lg:gap-12">
+          <div className="mt-8 mx-auto grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
             {partners.map((partner, index) => (
               <img
                 key={index}
-                src={formatImage(partner.logo, 500, 530).full}
+                src={urlFor(partner.logo).url()}
                 alt={`${partner.name} logo`}
-                width={109}
-                height={48}
-                className="h-auto w-auto object-contain max-h-18"
+                className="h-full w-full object-contain max-h-24"
               />
             ))}
           </div>

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "game studio Indonesia"
   ],
   icons: {
-    icon: "/logo-no-bg.svg",
+    icon: process.env.BASE_PATH ? `${process.env.BASE_PATH}/logo-no-bg.svg` : "/logo-no-bg.svg",
   },
   openGraph: {
     title: "Eternal Clover Studio",
@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`dark ${fredoka.variable} ${comfortaa.variable} antialiased`}
+        className={`${fredoka.variable} ${comfortaa.variable} antialiased`}
       >
         {children}
          <Toaster richColors theme="dark" position="bottom-right" />

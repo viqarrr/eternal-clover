@@ -78,7 +78,7 @@ const BlogDetail = async ({ params }: { params: Promise<{ slug: string }> }) => 
         </div>
       </div>
       <div className="container">
-        <div className="prose dark:prose-invert mx-auto max-w-3xl">
+        <div className="prose prose-invert mx-auto max-w-3xl">
           <PortableText value={blog.body} />
         </div>
       </div>

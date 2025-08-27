@@ -72,6 +72,7 @@ const GameDetail = async ({ params }: { params: Promise<{ slug: string }> }) => 
                 playstore: game?.playstoreLink,
                 appstore: game?.appstoreLink,
                 itch: game?.itchioLink,
+                steam: game?.steamLink,
               };
 
               return (
@@ -83,7 +84,7 @@ const GameDetail = async ({ params }: { params: Promise<{ slug: string }> }) => 
       </div>
 
       <div className="container py-16">
-        <div className="prose dark:prose-invert mx-auto max-w-3xl">
+        <div className="prose prose-invert mx-auto max-w-3xl">
           <ContentCarousel items={screenshotsUrl} />
           <PortableText value={game.description} />
         </div>

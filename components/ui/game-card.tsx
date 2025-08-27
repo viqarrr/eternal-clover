@@ -20,7 +20,7 @@ const GameCard = ({ gameData }: GameCardProps) => {
 
   return (
     <>
-      <div className="w-98 md:w-[550px] relative mt-4 h-auto group mx-auto dark:bg-black  bg-white dark:border-0 border overflow-hidden rounded-md dark:text-white text-black ">
+      <div className="w-98 md:w-[550px] relative mt-4 h-auto group mx-auto dark:bg-black  bg-white dark:border-0 border overflow-hidden rounded-md text-white">
         <figure className="w-full h-full rounded-md  overflow-hidden">
           <Image
             src={imageUrl.full}
@@ -40,7 +40,7 @@ const GameCard = ({ gameData }: GameCardProps) => {
           <p className="text-medium">{formatPlatform(gameData.platform)}</p>
           <Link
             href={`/games/${gameData.slug.current}`}
-            className="text-base dark:text-white text-blue-600 font-normal pt-2 flex gap-1 opacity-100 translate-y-0 md:opacity-0 md:translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 hover:underline transition-all duration-300"
+            className="text-base text-white font-normal pt-2 flex gap-1 opacity-100 translate-y-0 md:opacity-0 md:translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 hover:underline transition-all duration-300"
           >
             Learn More
             <span>

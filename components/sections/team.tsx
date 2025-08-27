@@ -43,7 +43,7 @@ const Teams = ({ sectionData, teamData }: TeamProps) => {
   return (
     <section
       id="team"
-      className="bg-gray-50 py-16 md:py-32 dark:bg-transparent w-full flex justify-center"
+      className="py-16 md:py-32 w-full flex justify-center"
     >
       <div className="relative overflow-hidden max-w-5xl py-24 sm:py-32">
         <motion.div

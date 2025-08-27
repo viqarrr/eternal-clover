@@ -40,7 +40,7 @@ const PrivacyPolicyPage = async () => {
             <p className="text-muted-foreground mb-5">
               Last updated: {formatDate(data._updatedAt)}
             </p>
-            <div className="prose dark:prose-invert mx-auto max-w-3xl">
+            <div className="prose prose-invert mx-auto max-w-3xl">
               <PortableText value={data.content} />
             </div>
           </div>

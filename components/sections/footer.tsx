@@ -83,7 +83,7 @@ const Footer = () => {
           © {new Date().getFullYear()} Eternal Clover Studio, All rights
           reserved | 
           </span>
-          <Link href={"/privacy-policy"} className="hover:underline">Privacy Policy</Link>
+          <Link href={"/privacy-policy"} className="hover:underline"> Privacy Policy</Link>
         </div>
       </div>
     </footer>

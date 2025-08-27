@@ -37,7 +37,7 @@ export interface PageBase {
 }
 
 // Enums
-export type GameReleasePlatform = "playstore" | "appstore" | "itch";
+export type GameReleasePlatform = "playstore" | "appstore" | "itch" | "steam";
 
 // Game types
 export interface GameSection extends BaseContent {
@@ -52,6 +52,7 @@ export interface Game extends BaseContent {
   playstoreLink?: string;
   appstoreLink?: string;
   itchioLink?: string;
+  steamLink?: string;
   description: PortableText;
   screenshots: SanityImage[];
 }

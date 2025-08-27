@@ -54,6 +54,7 @@ export const gameType = defineType({
               { title: "Play Store", value: "playstore" },
               { title: "App Store", value: "appstore" },
               { title: "Itch.io", value: "itch" },
+              { title: "Steam", value: "steam" },
             ],
             layout: "tags",
           },
@@ -75,9 +76,15 @@ export const gameType = defineType({
     }),
     defineField({
       title: "Itch.io Link",
-      name: "itchLink",
+      name: "itchioLink",
       type: "url",
       hidden: ({ parent }) => !parent?.releasedOn?.includes("itch"),
+    }),
+    defineField({
+      title: "Steam Link",
+      name: "steamLink",
+      type: "url",
+      hidden: ({ parent }) => !parent?.releasedOn?.includes("steam"),
     }),
     {
       title: "Description",
